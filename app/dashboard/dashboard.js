@@ -1,3 +1,14 @@
-/**
- * Created by Vladimir on 17.4.2016 г..
- */
+'use strict';
+
+angular.module('issueTrackingSystem.dashboard', [])
+
+    .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/dashboard', {
+            templateUrl: 'dashboard/dashboard.html',
+            controller: 'DashboardCtrl'
+        });
+    }])
+
+    .controller('DashboardCtrl', [function() {
+
+    }]);

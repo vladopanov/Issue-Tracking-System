@@ -13,14 +13,17 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.authentication'
   $scope.register = function (user) {
     authentication.registerUser(user)
         .then(function () {
-          authentication.loginUser({Username: user.Email, Password: user.ConfirmPassword});
+          authentication.loginUser({Username: user.Email, Password: user.ConfirmPassword})
+              .then(function () {
+                $location.url('/dashboard');
+              });
         });
   };
 
   $scope.login = function (user) {
     authentication.loginUser(user)
         .then(function () {
-          $location.url('/dashboard')
+          $location.url('/dashboard');
         });
   };
 }]);
