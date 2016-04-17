@@ -9,12 +9,18 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.authentication'
   });
 }])
 
-.controller('HomeCtrl', ['$scope', 'authentication', function($scope, authentication) {
+.controller('HomeCtrl', ['$scope', '$location', 'authentication', function($scope, $location, authentication) {
   $scope.register = function (user) {
-    authentication.registerUser(user);
+    authentication.registerUser(user)
+        .then(function () {
+          authentication.loginUser({Username: user.Email, Password: user.ConfirmPassword});
+        });
   };
 
   $scope.login = function (user) {
-    console.log(user);
+    authentication.loginUser(user)
+        .then(function () {
+          $location.url('/dashboard')
+        });
   };
 }]);
