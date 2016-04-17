@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackingSystem.dashboard', [])
+angular.module('issueTrackingSystem.dashboard', ['issueTrackingSystem.users.users-service'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/dashboard', {
@@ -9,6 +9,6 @@ angular.module('issueTrackingSystem.dashboard', [])
         });
     }])
 
-    .controller('DashboardCtrl', [function() {
-
+    .controller('DashboardCtrl', ['$cookies', 'users', function($cookies, users) {
+        
     }]);

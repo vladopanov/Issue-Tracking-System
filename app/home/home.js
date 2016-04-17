@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackingSystem.home', ['issueTrackingSystem.authentication'])
+angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-service'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
@@ -9,11 +9,11 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.authentication'
   });
 }])
 
-.controller('HomeCtrl', ['$scope', '$location', 'authentication', function($scope, $location, authentication) {
+.controller('HomeCtrl', ['$scope', '$location', 'users', function($scope, $location, users) {
   $scope.register = function (user) {
-    authentication.registerUser(user)
+      users.registerUser(user)
         .then(function () {
-          authentication.loginUser({Username: user.Email, Password: user.ConfirmPassword})
+            users.loginUser({Username: user.Email, Password: user.ConfirmPassword})
               .then(function () {
                 $location.url('/dashboard');
               });
@@ -21,9 +21,12 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.authentication'
   };
 
   $scope.login = function (user) {
-    authentication.loginUser(user)
+      users.loginUser(user)
         .then(function () {
           $location.url('/dashboard');
-        });
+        })
+          .then(function () {
+              users.getCurrentUser();
+          });
   };
 }]);
