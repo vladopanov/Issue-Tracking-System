@@ -8,7 +8,7 @@ angular.module('issueTrackingSystem.users.users-service', [])
 
         $http.post(BASE_URL + 'api/Account/Register', user)
             .then(function (success) {
-                deferred.resolve(success.data)
+                deferred.resolve(success.data);
             }, function (error) {
                 deferred.reject(error);
             });
@@ -53,9 +53,28 @@ angular.module('issueTrackingSystem.users.users-service', [])
         return deferred.promise;
     }
 
+    function logoutUser(id) {
+        var deferred = $q.defer();
+
+        $http.post(BASE_URL + 'api/Account/Logout', id)
+            .then(function (success) {
+                deferred.resolve(success);
+                $cookies.remove('Id');
+                $cookies.remove('Username');
+                $cookies.remove('isAdmin');
+                $cookies.remove('authoToken');
+                $http.defaults.headers.common.Authorization = undefined;
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+        return deferred.promise;
+    }
+
     return {
         registerUser: registerUser,
         loginUser: loginUser,
-        getCurrentUser: getCurrentUser
+        getCurrentUser: getCurrentUser,
+        logoutUser: logoutUser
     }
 }]);

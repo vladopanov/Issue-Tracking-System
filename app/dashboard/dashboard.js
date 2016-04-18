@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackingSystem.dashboard', ['issueTrackingSystem.users.users-service'])
+angular.module('issueTrackingSystem.dashboard', ['issueTrackingSystem.users.users-service', 'issueTrackingSystem.logout'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/dashboard', {
