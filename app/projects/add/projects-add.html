@@ -1,0 +1,68 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Dashboard <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Projects</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<form class="form-horizontal">
+    <fieldset>
+        <legend>New Project</legend>
+        <div class="form-group">
+            <label for="inputName" class="col-lg-2 control-label">Name</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputName" ng-model="project.Name" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="textAreaDescription" class="col-lg-2 control-label">Description</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="textAreaDescription" ng-model="project.Description" required></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputProjectKey" class="col-lg-2 control-label">Project Key</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputProjectKey" ng-model="project.ProjectKey" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="selectLeaderId" class="col-lg-2 control-label">Leader Id</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="selectLeaderId" ng-model="project.LeadId">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="selectPriority" class="col-lg-2 control-label">Priority</label>
+            <div class="col-lg-10">
+                <select class="form-control" id="selectPriority">
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>Urgent</option>
+                </select>
+                </div>
+        </div>
+        <div class="form-group">
+            <label for="inputLabel" class="col-lg-2 control-label">Label</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputLabel">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Clear</button>
+                <button type="submit" class="btn btn-primary" ng-click="addProject(project)">Add Project</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

@@ -7,8 +7,9 @@ angular.module('issueTrackingSystem.dashboard', ['issueTrackingSystem.users.user
             templateUrl: 'dashboard/dashboard.html',
             controller: 'DashboardCtrl'
         });
+        $routeProvider.otherwise({ redirectTo: '/' });
     }])
 
-    .controller('DashboardCtrl', ['$cookies', 'users', function($cookies, users) {
-        
+    .controller('DashboardCtrl', ['$scope', function($scope) {
+
     }]);
