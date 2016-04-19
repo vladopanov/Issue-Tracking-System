@@ -29,6 +29,7 @@ angular.module('issueTrackingSystem.users.users-service', [])
         }).then(function (success) {
             deferred.resolve(success.data);
             $cookies.put('authoToken', success.data.access_token);
+            console.log($cookies.get('authoToken'));
             $http.defaults.headers.common.Authorization = 'Bearer ' + success.data.access_token;
         }, function (error) {
             deferred.reject(error);
