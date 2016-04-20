@@ -1,3 +1,3 @@
 ** SoftUni Issue Tracker **
 
-This is an individual project regarding the Java Script Framewroks cours in SoftUni.
+This is an individual project regarding the Java Script Framewroks course in SoftUni.
