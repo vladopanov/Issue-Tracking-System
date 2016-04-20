@@ -3,22 +3,17 @@
 angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-service'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl: 'home/home.html',
             controller: 'HomeCtrl'
     });
 }])
 
-    .controller('HomeCtrl', ['$scope', '$location', 'users', '$cookies', function($scope, $location, users, $cookies) {
-        if ($cookies.get('authoToken')) {
-            $location.url('/dashboard');
-        }
-
+    .controller('HomeCtrl', ['$scope', '$location', 'users', '$cookies', '$route', function($scope, $location, users, $cookies, $route) {
         $scope.register = function (user) {
             users.registerUser(user)
                 .then(function () {
                     users.loginUser({Username: user.Email, Password: user.ConfirmPassword})
                         .then(function () {
-                            $location.url('/dashboard');
+                            $route.reload();
                         });
             });
         };
@@ -26,10 +21,23 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-ser
         $scope.login = function (user) {
             users.loginUser(user)
                 .then(function () {
-                    $location.url('/dashboard');
+                    users.getCurrentUser();
                 })
-              .then(function () {
-                  users.getCurrentUser();
-              });
+                    .then(function () {
+                        $route.reload();
+                    });
         };
-}]);
+
+        $scope.isLoggedIn = function() {
+            return $cookies.get('authoToken');
+        }
+}])
+
+    .directive('homeDirective', function() {
+        return {
+            restrict: 'A',
+            replace: true,
+            templateUrl: 'home/home.html',
+            controller: 'HomeCtrl'
+        }
+    });

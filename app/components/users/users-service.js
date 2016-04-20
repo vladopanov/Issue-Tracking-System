@@ -29,8 +29,8 @@ angular.module('issueTrackingSystem.users.users-service', [])
         }).then(function (success) {
             deferred.resolve(success.data);
             $cookies.put('authoToken', success.data.access_token);
-            console.log($cookies.get('authoToken'));
             $http.defaults.headers.common.Authorization = 'Bearer ' + success.data.access_token;
+            console.log('Logged In')
         }, function (error) {
             deferred.reject(error);
         });
@@ -59,12 +59,12 @@ angular.module('issueTrackingSystem.users.users-service', [])
 
         $http.post(BASE_URL + 'api/Account/Logout', id)
             .then(function (success) {
-                deferred.resolve(success);
                 $cookies.remove('Id');
                 $cookies.remove('Username');
                 $cookies.remove('isAdmin');
                 $cookies.remove('authoToken');
                 $http.defaults.headers.common.Authorization = undefined;
+                deferred.resolve(success);
             }, function (error) {
                 deferred.reject(error);
             });
