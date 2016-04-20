@@ -4,11 +4,13 @@
 angular.module('issueTrackingSystem', [
     'ngRoute',
     'ngCookies',
-    'issueTrackingSystem.home',
+    'issueTrackingSystem.welcome',
     'issueTrackingSystem.navbar',
     'issueTrackingSystem.projects.add',
     'issueTrackingSystem.users.users-service',
-    'issueTrackingSystem.logout'
+    'issueTrackingSystem.projects.projects-service',
+    'issueTrackingSystem.logout',
+    'issueTrackingSystem.dashboard'
 ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});

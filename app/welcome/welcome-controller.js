@@ -1,11 +1,6 @@
 'use strict';
 
-angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-service'])
-//    .config(['$routeProvider', function($routeProvider) {
-//        $routeProvider.when('/', {
-//            controller: 'HomeCtrl'
-//    });
-//}])
+angular.module('issueTrackingSystem.welcome', ['issueTrackingSystem.users.users-service'])
 
     .controller('HomeCtrl', ['$scope', '$location', 'users', '$cookies', '$route', function($scope, $location, users, $cookies, $route) {
         $scope.register = function (user) {
@@ -20,9 +15,12 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-ser
 
         $scope.login = function (user) {
             users.loginUser(user)
-                .then(function () {
-                    $route.reload();
-                });
+                .then(function() {
+                    users.getCurrentUser();
+                })
+                    .then(function () {
+                        $route.reload();
+                    });
         };
 
         $scope.isLoggedIn = function() {
@@ -34,7 +32,7 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-ser
         return {
             restrict: 'A',
             replace: true,
-            templateUrl: 'home/welcome-view.html',
+            templateUrl: 'welcome/welcome-view.html',
             controller: 'HomeCtrl'
         }
     });

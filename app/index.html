@@ -17,7 +17,7 @@
     <div class="container">
         <div welcome-directive></div>
         <div navbar-directive></div>
-        <div ng-view></div>
+        <div ng-view ng-controller="NavbarCtrl" ng-if="isLoggedIn()"></div>
     </div>
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -26,11 +26,13 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
 
-    <script src="home/welcome-controller.js"></script>
+    <script src="welcome/welcome-controller.js"></script>
     <script src="components/users/users-service.js"></script>
+    <script src="components/projects/projects-service.js"></script>
     <script src="navbar/navbar-controller.js"></script>
     <script src="projects/add/projects-add.js"></script>
     <script src="logout/logout-controller.js"></script>
+    <script src="dashboard/dashboard-controller.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
