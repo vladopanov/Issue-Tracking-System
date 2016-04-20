@@ -2,7 +2,7 @@
 
 angular.module('issueTrackingSystem.users.users-service', [])
 
-.factory('users', ['$http', '$q', '$cookies', 'BASE_URL', function ($http, $q, $cookies, BASE_URL) {
+.factory('users', ['$http', '$q', '$window', 'BASE_URL', function ($http, $q, $window, BASE_URL) {
     function registerUser(user) {
         var deferred = $q.defer();
 
@@ -28,9 +28,8 @@ angular.module('issueTrackingSystem.users.users-service', [])
             }
         }).then(function (success) {
             deferred.resolve(success.data);
-            $cookies.put('authoToken', success.data.access_token);
+            $window.sessionStorage['authoToken'] = success.data.access_token;
             $http.defaults.headers.common.Authorization = 'Bearer ' + success.data.access_token;
-            console.log('Logged In')
         }, function (error) {
             deferred.reject(error);
         });
@@ -44,9 +43,16 @@ angular.module('issueTrackingSystem.users.users-service', [])
         $http.get(BASE_URL + 'Users/me')
             .then(function (success) {
                 deferred.resolve(success.data);
-                $cookies.put('Id', success.data.Id);
-                $cookies.put('Username', success.data.Username);
-                $cookies.put('isAdmin', success.data.isAdmin);
+                var userInfo  = {
+                    Id: success.data.Id,
+                    Username: success.data.Username,
+                    isAdmin: success.data.isAdmin
+                };
+                $window.sessionStorage['Id'] = success.data.Id;
+
+                //$cookies.put('Id', success.data.Id);
+                //$cookies.put('Username', success.data.Username);
+                //$cookies.put('isAdmin', success.data.isAdmin);
             }, function (error) {
                 deferred.reject(error);
             });
@@ -56,20 +62,19 @@ angular.module('issueTrackingSystem.users.users-service', [])
 
     function logoutUser(id) {
         var deferred = $q.defer();
+        $http.defaults.headers.common.Authorization = 'Bearer ' + $window.sessionStorage['authoToken'];
 
         $http.post(BASE_URL + 'api/Account/Logout', id)
             .then(function (success) {
-                $cookies.remove('Id');
-                $cookies.remove('Username');
-                $cookies.remove('isAdmin');
-                $cookies.remove('authoToken');
-                $http.defaults.headers.common.Authorization = undefined;
+                window.sessionStorage.clear();
+                $http.defaults.headers.common.Authorization = null;
                 deferred.resolve(success);
             }, function (error) {
                 deferred.reject(error);
             });
 
         return deferred.promise;
+
     }
 
     return {

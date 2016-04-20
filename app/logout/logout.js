@@ -10,9 +10,11 @@ angular.module('issueTrackingSystem.logout', ['issueTrackingSystem.users.users-s
         $routeProvider.otherwise({ redirectTo: '/' });
     }])
 
-    .controller('LogoutCtrl', ['$scope', 'users', '$cookies', '$location', function($scope, users, $cookies, $location) {
+    .controller('LogoutCtrl', ['$scope', 'users', '$window', '$location', function($scope, users, $window, $location) {
+        var id = $window.sessionStorage.Id;
+        console.log(id);
         $scope.logout = function () {
-            users.logoutUser($cookies.get('Id'))
+            users.logoutUser(id)
                 .then(function () {
                     $location.url('/');
                 });

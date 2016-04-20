@@ -7,7 +7,7 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-ser
     });
 }])
 
-    .controller('HomeCtrl', ['$scope', '$location', 'users', '$cookies', '$route', function($scope, $location, users, $cookies, $route) {
+    .controller('HomeCtrl', ['$scope', '$location', 'users', '$window', '$route', function($scope, $location, users, $window, $route) {
         $scope.register = function (user) {
             users.registerUser(user)
                 .then(function () {
@@ -29,7 +29,7 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-ser
         };
 
         $scope.isLoggedIn = function() {
-            return $cookies.get('authoToken');
+            return $window.sessionStorage.authoToken;
         }
 }])
 
