@@ -4,17 +4,15 @@ angular.module('issueTrackingSystem.logout', ['issueTrackingSystem.users.users-s
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/logout', {
-            templateUrl: 'logout/logout.html',
+            templateUrl: 'logout/logout-view.html',
             controller: 'LogoutCtrl'
         });
         $routeProvider.otherwise({ redirectTo: '/' });
     }])
 
-    .controller('LogoutCtrl', ['$scope', 'users', '$window', '$location', function($scope, users, $window, $location) {
-        var id = $window.sessionStorage.Id;
-        console.log(id);
+    .controller('LogoutCtrl', ['$scope', 'users', '$location', function($scope, users, $location) {
         $scope.logout = function () {
-            users.logoutUser(id)
+            users.logoutUser()
                 .then(function () {
                     $location.url('/');
                 });

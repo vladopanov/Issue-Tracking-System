@@ -2,7 +2,7 @@
 
 angular.module('issueTrackingSystem.users.users-service', [])
 
-.factory('users', ['$http', '$q', '$window', 'BASE_URL', function ($http, $q, $window, BASE_URL) {
+.factory('users', ['$http', '$q', '$cookies', 'BASE_URL', function ($http, $q, $cookies, BASE_URL) {
     function registerUser(user) {
         var deferred = $q.defer();
 
@@ -25,11 +25,11 @@ angular.module('issueTrackingSystem.users.users-service', [])
             data: 'Username=' + user.Username + '&Password=' + user.Password + '&grant_type=password',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(function (success) {
+            }})
+            .then(function (success) {
+            $cookies.put('authoToken', success.data.access_token);
+            //$http.defaults.headers.common.Authorization = 'Bearer ' + success.data.access_token;
             deferred.resolve(success.data);
-            $window.sessionStorage['authoToken'] = success.data.access_token;
-            $http.defaults.headers.common.Authorization = 'Bearer ' + success.data.access_token;
         }, function (error) {
             deferred.reject(error);
         });
@@ -40,19 +40,14 @@ angular.module('issueTrackingSystem.users.users-service', [])
     function getCurrentUser() {
         var deferred = $q.defer();
 
-        $http.get(BASE_URL + 'Users/me')
+        $http({
+            method: 'GET',
+            url: BASE_URL + 'Users/me',
+            headers: {
+                'Authorization': 'Bearer ' + $cookies.get('authoToken')
+            }})
             .then(function (success) {
                 deferred.resolve(success.data);
-                var userInfo  = {
-                    Id: success.data.Id,
-                    Username: success.data.Username,
-                    isAdmin: success.data.isAdmin
-                };
-                $window.sessionStorage['Id'] = success.data.Id;
-
-                //$cookies.put('Id', success.data.Id);
-                //$cookies.put('Username', success.data.Username);
-                //$cookies.put('isAdmin', success.data.isAdmin);
             }, function (error) {
                 deferred.reject(error);
             });
@@ -60,14 +55,17 @@ angular.module('issueTrackingSystem.users.users-service', [])
         return deferred.promise;
     }
 
-    function logoutUser(id) {
+    function logoutUser() {
         var deferred = $q.defer();
-        $http.defaults.headers.common.Authorization = 'Bearer ' + $window.sessionStorage['authoToken'];
 
-        $http.post(BASE_URL + 'api/Account/Logout', id)
+        $http({
+            method: 'POST',
+            url: BASE_URL + 'api/Account/Logout',
+            headers: {
+                'Authorization': 'Bearer ' + $cookies.get('authoToken')
+            }})
             .then(function (success) {
-                window.sessionStorage.clear();
-                $http.defaults.headers.common.Authorization = null;
+                $cookies.remove('authoToken');
                 deferred.resolve(success);
             }, function (error) {
                 deferred.reject(error);

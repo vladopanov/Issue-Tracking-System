@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-service'])
-    .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/', {
-            controller: 'HomeCtrl'
-    });
-}])
+//    .config(['$routeProvider', function($routeProvider) {
+//        $routeProvider.when('/', {
+//            controller: 'HomeCtrl'
+//    });
+//}])
 
-    .controller('HomeCtrl', ['$scope', '$location', 'users', '$window', '$route', function($scope, $location, users, $window, $route) {
+    .controller('HomeCtrl', ['$scope', '$location', 'users', '$cookies', '$route', function($scope, $location, users, $cookies, $route) {
         $scope.register = function (user) {
             users.registerUser(user)
                 .then(function () {
@@ -21,23 +21,20 @@ angular.module('issueTrackingSystem.home', ['issueTrackingSystem.users.users-ser
         $scope.login = function (user) {
             users.loginUser(user)
                 .then(function () {
-                    users.getCurrentUser();
-                })
-                    .then(function () {
-                        $route.reload();
-                    });
+                    $route.reload();
+                });
         };
 
         $scope.isLoggedIn = function() {
-            return $window.sessionStorage.authoToken;
+            return $cookies.get('authoToken');
         }
 }])
 
-    .directive('homeDirective', function() {
+    .directive('welcomeDirective', function() {
         return {
             restrict: 'A',
             replace: true,
-            templateUrl: 'home/home.html',
+            templateUrl: 'home/welcome-view.html',
             controller: 'HomeCtrl'
         }
     });

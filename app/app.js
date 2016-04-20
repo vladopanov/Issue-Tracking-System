@@ -5,7 +5,7 @@ angular.module('issueTrackingSystem', [
     'ngRoute',
     'ngCookies',
     'issueTrackingSystem.home',
-    'issueTrackingSystem.dashboard',
+    'issueTrackingSystem.navbar',
     'issueTrackingSystem.projects.add',
     'issueTrackingSystem.users.users-service',
     'issueTrackingSystem.logout'

@@ -15,8 +15,8 @@
 </head>
 <body ng-cloak>
     <div class="container">
-        <div home-directive></div>
-        <div dashboard-directive></div>
+        <div welcome-directive></div>
+        <div navbar-directive></div>
         <div ng-view></div>
     </div>
 
@@ -26,11 +26,11 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
 
-    <script src="home/home.js"></script>
+    <script src="home/welcome-controller.js"></script>
     <script src="components/users/users-service.js"></script>
-    <script src="dashboard/dashboard.js"></script>
+    <script src="navbar/navbar-controller.js"></script>
     <script src="projects/add/projects-add.js"></script>
-    <script src="logout/logout.js"></script>
+    <script src="logout/logout-controller.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
