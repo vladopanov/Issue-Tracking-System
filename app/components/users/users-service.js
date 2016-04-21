@@ -66,6 +66,7 @@ angular.module('issueTrackingSystem.users.users-service', [])
             }})
             .then(function (success) {
                 $cookies.remove('authoToken');
+                $cookies.remove('id');
                 deferred.resolve(success);
             }, function (error) {
                 deferred.reject(error);

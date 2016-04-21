@@ -9,6 +9,7 @@ angular.module('issueTrackingSystem', [
     'issueTrackingSystem.projects.add',
     'issueTrackingSystem.users.users-service',
     'issueTrackingSystem.projects.projects-service',
+    'issueTrackingSystem.issues.issues-service',
     'issueTrackingSystem.logout',
     'issueTrackingSystem.dashboard'
 ])
