@@ -13,7 +13,8 @@ angular.module('issueTrackingSystem', [
     'issueTrackingSystem.logout',
     'issueTrackingSystem.dashboard',
     'issueTrackingSystem.projects.project',
-    'issueTrackingSystem.projects.project.edit'
+    'issueTrackingSystem.projects.project.edit',
+    'issueTrackingSystem.issues.issue'
 ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});
