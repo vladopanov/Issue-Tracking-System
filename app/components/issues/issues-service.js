@@ -22,7 +22,26 @@ angular.module('issueTrackingSystem.issues.issues-service', [])
             return deferred.promise;
         }
 
+        function getProjectIssuesById(id) {
+            var deferred = $q.defer();
+
+            $http({
+                method: 'GET',
+                url: BASE_URL + 'projects/' + id + '/Issues',
+                headers: {
+                    'Authorization': 'Bearer ' + $cookies.get('authoToken')
+                }})
+                .then(function (success) {
+                    deferred.resolve(success.data);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
         return {
-            getMyIssues: getMyIssues
+            getMyIssues: getMyIssues,
+            getProjectIssuesById: getProjectIssuesById
         }
     }]);
