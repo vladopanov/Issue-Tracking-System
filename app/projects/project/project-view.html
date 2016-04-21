@@ -1,0 +1,47 @@
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Legend</legend>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Project Key:</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" value="{{}}" ng-disabled="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputName" class="col-lg-2 control-label">Name</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputName" value="{{}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="textAreaDescription" class="col-lg-2 control-label">Description</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="textAreaDescription">{{}}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputLeadId" class="col-lg-2 control-label">LeadId (current id: {{}})</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputLeadId" value="{{}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Labels:</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" value="{{}}" ng-disabled="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Priorities:</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" value="{{}}" ng-disabled="true">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn btn-primary">Add Issue</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

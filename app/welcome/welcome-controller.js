@@ -15,12 +15,9 @@ angular.module('issueTrackingSystem.welcome', ['issueTrackingSystem.users.users-
 
         $scope.login = function (user) {
             users.loginUser(user)
-                .then(function() {
-                    users.getCurrentUser();
-                })
-                    .then(function () {
-                        $route.reload();
-                    });
+                .then(function () {
+                    $route.reload();
+                });
         };
 
         $scope.isLoggedIn = function() {

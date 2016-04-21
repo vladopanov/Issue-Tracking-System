@@ -4,12 +4,11 @@ angular.module('issueTrackingSystem.projects.projects-service', [])
 
     .factory('projects', ['$http', '$q', '$cookies', 'BASE_URL', function ($http, $q, $cookies, BASE_URL) {
         function getProjectsByCurrentUserLeadId() {
-            var deferred = $q.defer(),
-                id = $cookies.get('id');
+            var deferred = $q.defer();
 
             $http({
                 method: 'GET',
-                url: BASE_URL + 'projects?filter=Lead.Id="' + id + '"&pageSize=100&pageNumber=1',
+                url: BASE_URL + 'projects?filter=Lead.Id="' + $cookies.get('id') + '"&pageSize=100&pageNumber=1',
                 headers: {
                     'Authorization': 'Bearer ' + $cookies.get('authoToken')
                 }})
