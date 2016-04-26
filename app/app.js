@@ -20,4 +20,14 @@ angular.module('issueTrackingSystem', [
         $routeProvider.otherwise({redirectTo: '/'});
     }])
 
+    .run(['$rootScope', '$location', '$cookies', '$http', function($rootScope, $location, $cookies, $http) {
+        $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection) {
+            if (rejection == 'Unauthorized Access') {
+                $location.path('/');
+            }
+        });
+
+        $http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get('authoToken');
+    }])
+
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');

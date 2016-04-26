@@ -14,7 +14,7 @@ angular.module('issueTrackingSystem.logout', ['issueTrackingSystem.users.users-s
         $scope.logout = function () {
             users.logoutUser()
                 .then(function () {
-                    $location.url('/');
+                    $location.path('/');
                 });
         }
     }]);

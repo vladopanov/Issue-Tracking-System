@@ -4,10 +4,12 @@
     <div class="col-md-4">
         <div>
             <h2>Affiliated Projects</h2>
-            <div class="list-group">
-                <a href="#/projects/{{project.Id}}" class="list-group-item" ng-repeat="project in projectsByCurrentUserId.Projects">
-                    {{project.Name}}
-                </a>
+            <div class="affiliatedProjects">
+                <div ng-repeat="project in projectsByCurrentUserId.Projects">
+                    <a href="#/projects/{{project.Id}}">
+                        {{project.Name}}
+                    </a>
+                </div>
             </div>
         </div>
     </div>

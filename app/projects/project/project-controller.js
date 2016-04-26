@@ -17,6 +17,18 @@ angular.module('issueTrackingSystem.projects.project', ['issueTrackingSystem.pro
             .then(function(project) {
                 $scope.project = project;
                 $scope.projectLeaderId = project.Lead.Id;
+
+                var labels = [];
+                project.Labels.forEach(function(label) {
+                    labels.push(label.Name);
+                });
+                $scope.labels = labels.join(', ');
+
+                var priorities = [];
+                project.Priorities.forEach(function(priority) {
+                    priorities.push(priority.Name);
+                });
+                $scope.priorities = priorities.join(', ');
             });
 
         issues.getProjectIssuesById(projectId)

@@ -9,10 +9,11 @@ angular.module('issueTrackingSystem.issues.issues-service', [])
 
             $http({
                 method: 'GET',
-                url: BASE_URL + 'issues/me?orderBy=DueDate desc, IssueKey&pageSize=100&pageNumber=1',
-                headers: {
-                    'Authorization': 'Bearer ' + $cookies.get('authoToken')
-                }})
+                url: BASE_URL + 'issues/me?orderBy=DueDate desc, IssueKey&pageSize=100&pageNumber=1'
+            })
+                //headers: {
+                //    'Authorization': 'Bearer ' + $cookies.get('authoToken')
+                //}})
                 .then(function (success) {
                     deferred.resolve(success.data);
                 }, function (error) {
@@ -27,10 +28,11 @@ angular.module('issueTrackingSystem.issues.issues-service', [])
 
             $http({
                 method: 'GET',
-                url: BASE_URL + 'projects/' + id + '/Issues',
-                headers: {
-                    'Authorization': 'Bearer ' + $cookies.get('authoToken')
-                }})
+                url: BASE_URL + 'projects/' + id + '/Issues'
+            })
+                //headers: {
+                //    'Authorization': 'Bearer ' + $cookies.get('authoToken')
+                //}})
                 .then(function (success) {
                     deferred.resolve(success.data);
                 }, function (error) {

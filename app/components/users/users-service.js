@@ -28,6 +28,7 @@ angular.module('issueTrackingSystem.users.users-service', [])
             }})
             .then(function (success) {
             $cookies.put('authoToken', success.data.access_token);
+            $http.defaults.headers.common.Authorization = 'Bearer ' + success.data.access_token;
             deferred.resolve(success.data);
         }, function (error) {
             deferred.reject(error);
@@ -41,10 +42,11 @@ angular.module('issueTrackingSystem.users.users-service', [])
 
         $http({
             method: 'GET',
-            url: BASE_URL + 'Users/me',
-            headers: {
-                'Authorization': 'Bearer ' + $cookies.get('authoToken')
-            }})
+            url: BASE_URL + 'Users/me'
+        })
+            //headers: {
+            //    'Authorization': 'Bearer ' + $cookies.get('authoToken')
+            //}})
             .then(function (success) {
                 $cookies.put('id', success.data.Id);
                 deferred.resolve(success.data);
@@ -60,13 +62,15 @@ angular.module('issueTrackingSystem.users.users-service', [])
 
         $http({
             method: 'POST',
-            url: BASE_URL + 'api/Account/Logout',
-            headers: {
-                'Authorization': 'Bearer ' + $cookies.get('authoToken')
-            }})
+            url: BASE_URL + 'api/Account/Logout'
+        })
+            //headers: {
+            //    'Authorization': 'Bearer ' + $cookies.get('authoToken')
+            //}})
             .then(function (success) {
                 $cookies.remove('authoToken');
                 $cookies.remove('id');
+                $http.defaults.headers.common.Authorization = undefined;
                 deferred.resolve(success);
             }, function (error) {
                 deferred.reject(error);

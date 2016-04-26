@@ -3,3 +3,12 @@
 .container {
   width: 80%;
 }
+
+.affiliatedProjects {
+  font-size: 1.5em;
+}
+
+.projectData {
+    /*font-weight: bold;*/
+    margin: 5% 0%;
+}
