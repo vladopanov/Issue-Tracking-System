@@ -1,1 +1,45 @@
-Issue
+<div class="row">
+    <div class="col-md-5">
+        <h3>{{issue.IssueKey}}</h3>
+        <div class="issueData">
+            Title: <span>{{issue.Title}}</span>
+        </div>
+        <div class="issueData">
+            Description: <span>{{issue.Description}}</span>
+        </div>
+        <div class="issueData">
+            AssigneeId (current id: {{issue.Assignee.Id}}): <span>{{issue.Assignee.Username}}</span>
+        </div>
+        <div class="issueData">
+            PriorityId (current id: {{issue.Priority.Id}}): <span>{{issue.Priority.Name}}</span>
+        </div>
+        <div class="issueData">
+            DueDate: <span>{{issue.DueDate}}</span>
+        </div>
+        <div class="issueData">
+            Author: <span>{{issue.Author.Username}}</span>
+        </div>
+        <div class="issueData">
+            Project: <span>{{issue.Project.Name}}</span>
+        </div>
+        <div class="issueData">
+            Status: <span>{{issue.Status.Name}}</span>
+        </div>
+        <div class="issueData">
+            Labels: <span>{{labels}}</span>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <a href="#"><button type="submit" class="btn btn-primary" ng-if="userId == projectLeadId">Edit</button></a>
+            </div>
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+</div>
+
+<div>
+
+</div>
