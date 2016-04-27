@@ -44,9 +44,6 @@ angular.module('issueTrackingSystem.users.users-service', [])
             method: 'GET',
             url: BASE_URL + 'Users/me'
         })
-            //headers: {
-            //    'Authorization': 'Bearer ' + $cookies.get('authoToken')
-            //}})
             .then(function (success) {
                 $cookies.put('id', success.data.Id);
                 deferred.resolve(success.data);
@@ -64,9 +61,6 @@ angular.module('issueTrackingSystem.users.users-service', [])
             method: 'POST',
             url: BASE_URL + 'api/Account/Logout'
         })
-            //headers: {
-            //    'Authorization': 'Bearer ' + $cookies.get('authoToken')
-            //}})
             .then(function (success) {
                 $cookies.remove('authoToken');
                 $cookies.remove('id');
@@ -77,13 +71,26 @@ angular.module('issueTrackingSystem.users.users-service', [])
             });
 
         return deferred.promise;
+    }
 
+    function changePassword(password) {
+        var deferred = $q.defer();
+
+        $http.post(BASE_URL + 'api/Account/ChangePassword', password)
+            .then(function (success) {
+                deferred.resolve(success.data);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+        return deferred.promise;
     }
 
     return {
         registerUser: registerUser,
         loginUser: loginUser,
         getCurrentUser: getCurrentUser,
-        logoutUser: logoutUser
+        logoutUser: logoutUser,
+        changePassword: changePassword
     }
 }]);

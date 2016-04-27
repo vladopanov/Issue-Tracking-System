@@ -17,3 +17,7 @@
     /*font-weight: bold;*/
     margin: 5% 0%;
 }
+
+td {
+    word-break: break-all;
+}

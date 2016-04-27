@@ -15,6 +15,7 @@ angular.module('issueTrackingSystem.dashboard', [
     }])
 
     .controller('DashboardCtrl', ['$scope', 'users', 'projects', 'issues',  function($scope, users, projects, issues) {
+        var associatedProjects = [];
 
         projects.getAllProjects()
             .then(function(allProjects) {
@@ -26,6 +27,7 @@ angular.module('issueTrackingSystem.dashboard', [
                 projects.getProjectsByCurrentUserLeadId()
                     .then(function(projectsByCurrentUserId) {
                         $scope.projectsByCurrentUserId = projectsByCurrentUserId;
+                        issues.get
                     });
             });
 

@@ -3,9 +3,20 @@
 angular.module('issueTrackingSystem.issues.issue', ['issueTrackingSystem.issues.issues-service'])
 
     .config(['$routeProvider', function($routeProvider) {
+        var routeChecks = {
+            authenticated: ['$q', '$cookies', function($q, $cookies) {
+                if ($cookies.get('authoToken')) {
+                    return $q.when(true);
+                }
+
+                return $q.reject('Unauthorized Access');
+            }]
+        };
+
         $routeProvider.when('/issues/:id', {
             templateUrl: 'issues/issue/issue-view.html',
-            controller: 'IssueCtrl'
+            controller: 'IssueCtrl',
+            resolve: routeChecks.authenticated
         });
         $routeProvider.otherwise({ redirectTo: '/' });
     }])

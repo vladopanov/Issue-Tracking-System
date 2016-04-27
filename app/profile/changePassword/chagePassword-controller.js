@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('issueTrackingSystem.logout', ['issueTrackingSystem.users.users-service'])
+angular.module('issueTrackingSystem.profile.password', ['issueTrackingSystem.users.users-service'])
 
     .config(['$routeProvider', function($routeProvider) {
         var routeChecks = {
@@ -13,19 +13,21 @@ angular.module('issueTrackingSystem.logout', ['issueTrackingSystem.users.users-s
             }]
         };
 
-        $routeProvider.when('/logout', {
-            templateUrl: 'logout/logout-view.html',
-            controller: 'LogoutCtrl',
+        $routeProvider.when('/profile/password', {
+            templateUrl: 'profile/changePassword/changePassword-view.html',
+            controller: 'ChangePasswordCtrl',
             resolve: routeChecks.authenticated
         });
         $routeProvider.otherwise({ redirectTo: '/' });
     }])
 
-    .controller('LogoutCtrl', ['$scope', 'users', '$location', function($scope, users, $location) {
-        $scope.logout = function () {
-            users.logoutUser()
+    .controller('ChangePasswordCtrl', ['$scope', 'users', '$location', function($scope, users, $location) {
+        $scope.changePassword = function (password) {
+            users.changePassword(password)
                 .then(function () {
                     $location.path('/');
                 });
-        }
+        };
+
+
     }]);
