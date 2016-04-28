@@ -1,0 +1,13 @@
+<h1>Projects</h1>
+
+<div class="row clearfix">
+    <div class="col-md-5">
+        <div ng-repeat="project in allProjects" class="projects">
+            <a href="#/projects/{{project.Id}}">
+                {{project.Name}}
+            </a>
+            <a href="#/projects/{{project.Id}}/edit"><button type="submit" class="btn-sm btn-primary">Edit</button></a>
+            <button type="submit" class="btn-sm btn-primary">Add Issue</button>
+        </div>
+    </div>
+</div>

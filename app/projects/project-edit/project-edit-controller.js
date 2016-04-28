@@ -21,6 +21,22 @@ angular.module('issueTrackingSystem.projects.project.edit', ['issueTrackingSyste
         $routeProvider.otherwise({ redirectTo: '/' });
     }])
 
-    .controller('ProjectEditCtrl', ['$scope', '$route', 'projects', 'issues', '$cookies', function($scope, $route, projects, issues, $cookies) {
+    .controller('ProjectEditCtrl', ['$scope', '$route', 'projects', 'issues', '$cookies', function($scope, $route, projects) {
         var projectId = $route.current.params.id;
+        projects.getProjectById(projectId)
+            .then(function(project) {
+                $scope.project = project;
+
+                var labels = [];
+                project.Labels.forEach(function(label) {
+                    labels.push(label.Name);
+                });
+                $scope.labels = labels.join(', ');
+
+                var priorities = [];
+                project.Priorities.forEach(function(priority) {
+                    priorities.push(priority.Name);
+                });
+                $scope.priorities = priorities.join(', ');
+            });
     }]);

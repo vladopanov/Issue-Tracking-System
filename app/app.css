@@ -10,14 +10,19 @@
 
 .projectData {
     /*font-weight: bold;*/
-    margin: 5% 0%;
+    margin: 2% 0%;
 }
 
 .issueData {
     /*font-weight: bold;*/
-    margin: 5% 0%;
+    margin: 2% 0%;
 }
 
 td {
     word-break: break-all;
+}
+
+.projects {
+    font-size: 1.3em;
+    margin-bottom: 2%;
 }

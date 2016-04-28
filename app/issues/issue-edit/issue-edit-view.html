@@ -1,0 +1,70 @@
+<form class="form-horizontal col-md-6">
+    <fieldset>
+        <legend>Edit Issue</legend>
+        <div class="form-group">
+            <label for="inputIssueKey" class="col-lg-2 control-label">Issue Key</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputIssueKey" ng-model="issue.IssueKey" value="{{issue.IssueKey}}" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputTitle" class="col-lg-2 control-label">Title</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputTitle" ng-model="issue.Title" value="{{issue.Title}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="textAreaDescription" class="col-lg-2 control-label">Description</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="textAreaDescription" ng-model="issue.Description" value="{{issue.Description}}"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="selectAssigneeId" class="col-lg-2 control-label">AssigneeId (current id: {{issue.Assignee.Id}}): </label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="selectAssigneeId" ng-model="issue.Assignee.Username"  value="{{issue.Assignee.Username}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPriorityId" class="col-lg-2 control-label">PriorityId (current id: {{issue.Priority.Id}}): </label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputPriorityId" ng-model="issue.Priority.Name"  value="{{issue.Priority.Name}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDueDate" class="col-lg-2 control-label">DueDate: </label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputDueDate" ng-model="issue.DueDate" value="{{issue.DueDate}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAuthor" class="col-lg-2 control-label">Author: </label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputAuthor" ng-model="issue.Author.Username" value="{{issue.Author.Username}}" ng-disabled="userId != projectLeadId">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputProject" class="col-lg-2 control-label">Projet: </label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputProject" ng-model="issue.Project.Name" value="{{issue.Project.Name}}" ng-disabled="userId != projectLeadId">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputStatus" class="col-lg-2 control-label">Status: </label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputStatus" ng-model="issue.Status.Name" value="{{issue.Status.Name}}" ng-disabled="userId != issue.Assignee.Id || userId != projectLeadId">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputLabels" class="col-lg-2 control-label">Labels: </label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputLabels" ng-model="labels" value="{{labels}}" ng-disabled="userId != projectLeadId">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="submit" class="btn btn-primary" ng-click="editIssue(issue)">Edit</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

@@ -6,6 +6,7 @@ angular.module('issueTrackingSystem', [
     'ngCookies',
     'issueTrackingSystem.welcome',
     'issueTrackingSystem.navbar',
+    'issueTrackingSystem.projects',
     'issueTrackingSystem.projects.add',
     'issueTrackingSystem.users.users-service',
     'issueTrackingSystem.projects.projects-service',
@@ -15,6 +16,7 @@ angular.module('issueTrackingSystem', [
     'issueTrackingSystem.projects.project',
     'issueTrackingSystem.projects.project.edit',
     'issueTrackingSystem.issues.issue',
+    'issueTrackingSystem.issues.issue.edit',
     'issueTrackingSystem.profile.password'
 ])
     .config(['$routeProvider', function($routeProvider) {
