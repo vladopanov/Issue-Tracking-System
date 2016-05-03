@@ -4,6 +4,7 @@
 angular.module('issueTrackingSystem', [
     'ngRoute',
     'ngCookies',
+    'ui.bootstrap',
     'issueTrackingSystem.welcome',
     'issueTrackingSystem.navbar',
     'issueTrackingSystem.projects',
@@ -15,6 +16,7 @@ angular.module('issueTrackingSystem', [
     'issueTrackingSystem.dashboard',
     'issueTrackingSystem.projects.project',
     'issueTrackingSystem.projects.project.edit',
+    'issueTrackingSystem.projects.project.addIssue',
     'issueTrackingSystem.issues.issue',
     'issueTrackingSystem.issues.issue.edit',
     'issueTrackingSystem.profile.password'

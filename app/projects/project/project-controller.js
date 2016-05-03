@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('issueTrackingSystem.projects.project', ['issueTrackingSystem.projects.projects-service'])
+angular.module('issueTrackingSystem.projects.project', [
+    'issueTrackingSystem.projects.projects-service',
+    'issueTrackingSystem.projects.project.addIssue'
+    ])
 
     .config(['$routeProvider', function($routeProvider) {
         var routeChecks = {
@@ -21,7 +24,7 @@ angular.module('issueTrackingSystem.projects.project', ['issueTrackingSystem.pro
         $routeProvider.otherwise({ redirectTo: '/' });
     }])
 
-    .controller('ProjectCtrl', ['$scope', '$route', 'projects', 'issues', '$cookies', function($scope, $route, projects, issues, $cookies) {
+    .controller('ProjectCtrl', ['$scope', '$route', 'projects', 'issues', '$cookies', '$uibModal', function($scope, $route, projects, issues, $cookies, $uibModal) {
         var projectId = $route.current.params.id;
 
         projects.getProjectById(projectId)
@@ -48,4 +51,11 @@ angular.module('issueTrackingSystem.projects.project', ['issueTrackingSystem.pro
             });
 
         $scope.userId = $cookies.get('id');
+
+        $scope.openModal = function() {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'projects/project-addIssue/project-addIssue-view.html',
+                controller: 'ProjectAddIssueCtrl'
+            });
+        }
     }]);
