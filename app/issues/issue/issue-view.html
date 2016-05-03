@@ -39,14 +39,14 @@
     <div class="col-md-5 col-md-offset-1">
         <h5>Available Statuses:</h5>
         <div ng-if="issue.Status.Name == 'Closed'">
-            <div>----Open <button type="submit" class="btn-sm btn-success" ng-if="issue.Assignee.Id == userId">Change</button></div>
+            <!--<div>&#45;&#45;&#45;&#45;Open <button type="submit" class="btn-sm btn-success" ng-if="issue.Assignee.Id == userId" ng-click="changeStatus('Open')">Change</button></div>-->
         </div>
         <div ng-if="issue.Status.Name == 'InProgress'">
-            <div>----Closed <button type="submit" class="btn-sm btn-success" ng-if="issue.Assignee.Id == userId">Change</button></div>
+            <div>----Closed <button type="submit" class="btn-sm btn-success" ng-if="issue.Assignee.Id == userId" ng-click="changeStatus('Closed')">Change</button></div>
         </div>
         <div ng-if="issue.Status.Name == 'Open'">
-            <div>----Closed <button type="submit" class="btn-sm btn-success" ng-if="issue.Assignee.Id == userId">Change</button></div>
-            <div>----InProgress <button type="submit" class="btn-sm btn-success" ng-if="issue.Assignee.Id == userId">Change</button></div>
+            <div>----Closed <button type="submit" class="btn-sm btn-success" ng-if="issue.Assignee.Id == userId" ng-click="changeStatus('Closed')">Change</button></div>
+            <div>----InProgress <button type="submit" class="btn-sm btn-success" ng-if="issue.Assignee.Id == userId" ng-click="changeStatus('InProgress')">Change</button></div>
         </div>
     </div>
 </div>

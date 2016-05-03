@@ -40,19 +40,19 @@
         <div class="form-group">
             <label for="inputAuthor" class="col-lg-2 control-label">Author: </label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputAuthor" ng-model="issue.Author.Username" value="{{issue.Author.Username}}" ng-disabled="userId != projectLeadId">
+                <input type="text" class="form-control" id="inputAuthor" ng-model="issue.Author.Username" value="{{issue.Author.Username}}" disabled>
             </div>
         </div>
         <div class="form-group">
             <label for="inputProject" class="col-lg-2 control-label">Projet: </label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputProject" ng-model="issue.Project.Name" value="{{issue.Project.Name}}" ng-disabled="userId != projectLeadId">
+                <input type="text" class="form-control" id="inputProject" ng-model="issue.Project.Name" value="{{issue.Project.Name}}" disabled>
             </div>
         </div>
         <div class="form-group">
             <label for="inputStatus" class="col-lg-2 control-label">Status: </label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputStatus" ng-model="issue.Status.Name" value="{{issue.Status.Name}}" ng-disabled="userId != issue.Assignee.Id || userId != projectLeadId">
+                <input type="text" class="form-control" id="inputStatus" ng-model="issue.Status.Name" value="{{issue.Status.Name}}" disabled>
             </div>
         </div>
         <div class="form-group">

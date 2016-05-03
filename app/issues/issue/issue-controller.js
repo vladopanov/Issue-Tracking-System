@@ -44,6 +44,20 @@ angular.module('issueTrackingSystem.issues.issue', ['issueTrackingSystem.issues.
                         });
                 });
 
+        $scope.changeStatus = function(status) {
+            var statusId = null;
+
+            switch(status) {
+                case 'Open': statusId = 0; break;
+                case 'Closed': statusId = 1; break;
+                case 'InProgress': statusId = 2; break;
+            }
+            issues.changeIssueStatus(issueId, statusId)
+                .then(function() {
+                    $route.reload();
+                });
+        };
+
         //projects.getProjectById(projectId)
         //    .then(function(project) {
         //        $scope.projectLeadId = project.Lead.Id;

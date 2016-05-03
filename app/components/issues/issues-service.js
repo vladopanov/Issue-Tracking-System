@@ -52,9 +52,44 @@ angular.module('issueTrackingSystem.issues.issues-service', [])
             return deferred.promise;
         }
 
+        function editIssue(id, issue) {
+            var deferred = $q.defer();
+
+            $http({
+                method: 'PUT',
+                url: BASE_URL + 'issues/' + id,
+                data: issue
+            })
+                .then(function (success) {
+                    deferred.resolve(success.data);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
+        function changeIssueStatus(id, status) {
+            var deferred = $q.defer();
+
+            $http({
+                method: 'PUT',
+                url: BASE_URL + 'issues/' + id + '/changestatus?statusid=' + status,
+            })
+                .then(function (success) {
+                    deferred.resolve(success.data);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
         return {
             getMyIssues: getMyIssues,
             getProjectIssuesById: getProjectIssuesById,
-            getIssueById: getIssueById
+            getIssueById: getIssueById,
+            editIssue: editIssue,
+            changeIssueStatus: changeIssueStatus
         }
     }]);

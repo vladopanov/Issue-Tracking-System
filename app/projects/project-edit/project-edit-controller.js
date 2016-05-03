@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('issueTrackingSystem.projects.project.edit', ['issueTrackingSystem.projects.projects-service'])
+angular.module('issueTrackingSystem.projects.project.edit', [
+    'issueTrackingSystem.projects.projects-service',
+    'issueTrackingSystem.users.users-service'
+    ])
 
     .config(['$routeProvider', function($routeProvider) {
         var routeChecks = {
@@ -21,22 +24,50 @@ angular.module('issueTrackingSystem.projects.project.edit', ['issueTrackingSyste
         $routeProvider.otherwise({ redirectTo: '/' });
     }])
 
-    .controller('ProjectEditCtrl', ['$scope', '$route', 'projects', 'issues', '$cookies', function($scope, $route, projects) {
+    .controller('ProjectEditCtrl', ['$scope', '$route', 'projects', 'users', '$location', function($scope, $route, projects, users, $location) {
         var projectId = $route.current.params.id;
+        var labels = [];
+        var priorities = [];
+
         projects.getProjectById(projectId)
             .then(function(project) {
                 $scope.project = project;
 
-                var labels = [];
                 project.Labels.forEach(function(label) {
                     labels.push(label.Name);
                 });
                 $scope.labels = labels.join(', ');
 
-                var priorities = [];
                 project.Priorities.forEach(function(priority) {
                     priorities.push(priority.Name);
                 });
                 $scope.priorities = priorities.join(', ');
             });
+
+        $scope.editProject = function(projectToEdit) {
+            var editedProject = {};
+            users.getUserByUsername(projectToEdit.Lead.Username)
+                .then(function(user) {
+                    editedProject.Name = projectToEdit.Name;
+                    editedProject.Description = projectToEdit.Description;
+                    editedProject.LeadId = user.Id;
+
+                    var editedLabels = [];
+                    labels.forEach(function(label) {
+                        editedLabels.push({Name: label});
+                    });
+                    editedProject.labels = editedLabels;
+
+                    var editedPriorities = [];
+                    priorities.forEach(function(priority) {
+                        editedPriorities.push({Name: priority});
+                    });
+                    editedProject.priorities = editedPriorities;
+
+                    projects.editProject(projectId, editedProject)
+                        .then(function() {
+                            $location.path('/projects/' + projectId);
+                        });
+                });
+        }
     }]);
