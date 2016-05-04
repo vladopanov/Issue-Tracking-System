@@ -102,12 +102,29 @@ angular.module('issueTrackingSystem.users.users-service', [])
         return deferred.promise;
     }
 
+    function getAllUsers() {
+        var deferred = $q.defer();
+
+        $http({
+            method: 'GET',
+            url: BASE_URL + 'Users'
+        })
+            .then(function (success) {
+                deferred.resolve(success.data);
+            }, function (error) {
+                deferred.reject(error);
+            });
+
+        return deferred.promise;
+    }
+
     return {
         registerUser: registerUser,
         loginUser: loginUser,
         getCurrentUser: getCurrentUser,
         logoutUser: logoutUser,
         changePassword: changePassword,
-        getUserByUsername: getUserByUsername
+        getUserByUsername: getUserByUsername,
+        getAllUsers: getAllUsers
     }
 }]);

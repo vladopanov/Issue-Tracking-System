@@ -74,7 +74,24 @@ angular.module('issueTrackingSystem.issues.issues-service', [])
 
             $http({
                 method: 'PUT',
-                url: BASE_URL + 'issues/' + id + '/changestatus?statusid=' + status,
+                url: BASE_URL + 'issues/' + id + '/changestatus?statusid=' + status
+            })
+                .then(function (success) {
+                    deferred.resolve(success.data);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        }
+
+        function createIssue(issue) {
+            var deferred = $q.defer();
+
+            $http({
+                method: 'POST',
+                url: BASE_URL + 'issues',
+                data: issue
             })
                 .then(function (success) {
                     deferred.resolve(success.data);
@@ -90,6 +107,7 @@ angular.module('issueTrackingSystem.issues.issues-service', [])
             getProjectIssuesById: getProjectIssuesById,
             getIssueById: getIssueById,
             editIssue: editIssue,
-            changeIssueStatus: changeIssueStatus
+            changeIssueStatus: changeIssueStatus,
+            createIssue: createIssue
         }
     }]);
