@@ -16,7 +16,10 @@ angular.module('issueTrackingSystem.welcome', ['issueTrackingSystem.users.users-
         $scope.login = function (user) {
             users.loginUser(user)
                 .then(function () {
-                    $route.reload();
+                    users.getCurrentUser()
+                        .then(function() {
+                            $route.reload();
+                        });
                 });
         };
 

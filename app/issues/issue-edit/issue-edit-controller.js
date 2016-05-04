@@ -25,9 +25,9 @@ angular.module('issueTrackingSystem.issues.issue.edit', [
     }])
 
     .controller('IssueEditCtrl', ['$scope', '$route', 'projects', 'issues', '$cookies', 'users', '$location', function($scope, $route, projects, issues, $cookies, users, $location) {
-        var issueId = $route.current.params.id;
-        var projectId = null;
-        var labels = [];
+        var issueId = $route.current.params.id,
+            projectId = null,
+            labels = [];
 
         issues.getIssueById(issueId)
             .then(function(issue) {
@@ -39,6 +39,7 @@ angular.module('issueTrackingSystem.issues.issue.edit', [
                 $scope.labels = labels.join(', ');
 
                 projectId = issue.Project.Id;
+                $scope.assigneeId = issue.Assignee.Id;
             })
             .then(function() {
                 projects.getProjectById(projectId)
@@ -70,11 +71,6 @@ angular.module('issueTrackingSystem.issues.issue.edit', [
                         });
                 });
         };
-
-        //projects.getProjectById(projectId)
-        //    .then(function(project) {
-        //        $scope.projectLeadId = project.Lead.Id;
-        //    });
 
         $scope.userId = $cookies.get('id');
     }]);

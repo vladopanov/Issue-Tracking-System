@@ -27,9 +27,9 @@ angular.module('issueTrackingSystem.users.users-service', [])
                 'Content-Type': 'application/x-www-form-urlencoded'
             }})
             .then(function (success) {
-            $cookies.put('authoToken', success.data.access_token);
-            $http.defaults.headers.common.Authorization = 'Bearer ' + success.data.access_token;
-            deferred.resolve(success.data);
+                $cookies.put('authoToken', success.data.access_token);
+                $http.defaults.headers.common.Authorization = 'Bearer ' + success.data.access_token;
+                deferred.resolve(success.data);
         }, function (error) {
             deferred.reject(error);
         });
@@ -46,6 +46,7 @@ angular.module('issueTrackingSystem.users.users-service', [])
         })
             .then(function (success) {
                 $cookies.put('id', success.data.Id);
+                $cookies.put('isAdmin', success.data.isAdmin);
                 deferred.resolve(success.data);
             }, function (error) {
                 deferred.reject(error);
@@ -64,6 +65,7 @@ angular.module('issueTrackingSystem.users.users-service', [])
             .then(function (success) {
                 $cookies.remove('authoToken');
                 $cookies.remove('id');
+                $cookies.remove('isAdmin');
                 $http.defaults.headers.common.Authorization = undefined;
                 deferred.resolve(success);
             }, function (error) {

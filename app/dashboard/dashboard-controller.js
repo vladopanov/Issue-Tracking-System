@@ -14,18 +14,17 @@ angular.module('issueTrackingSystem.dashboard', [
         $routeProvider.otherwise({ redirectTo: '/' });
     }])
 
-    .controller('DashboardCtrl', ['$scope', 'users', 'projects', 'issues',  function($scope, users, projects, issues) {
+    .controller('DashboardCtrl', ['$scope', 'users', 'projects', 'issues', '$cookies',  function($scope, users, projects, issues, $cookies) {
+        $scope.isAdmin = $cookies.get('isAdmin');
+
         projects.getAllProjects()
             .then(function(allProjects) {
                 $scope.allProjects = allProjects;
             });
 
-        users.getCurrentUser()
-            .then(function() {
-                projects.getProjectsByCurrentUserLeadId()
-                    .then(function(projectsByCurrentUserId) {
-                        $scope.projectsByCurrentUserId = projectsByCurrentUserId;
-                    });
+        projects.getProjectsByCurrentUserLeadId()
+            .then(function(projectsByCurrentUserId) {
+                $scope.projectsByCurrentUserId = projectsByCurrentUserId;
             });
 
         issues.getMyIssues()
