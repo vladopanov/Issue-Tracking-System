@@ -22,7 +22,7 @@
         <div class="form-group">
             <label for="selectLeaderUsername" class="col-lg-2 control-label">Leader Username</label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="selectLeaderUsername" ng-model="project.Lead.Username"  value="{{project.Lead.Username}}">
+                <input type="text" class="form-control" id="selectLeaderUsername" ng-model="project.Lead.Username"  value="{{project.Lead.Username}}" ng-disabled="isAdmin === 'false'">
             </div>
         </div>
         <div class="form-group">

@@ -9,7 +9,7 @@ angular.module('issueTrackingSystem.issues.issues-service', [])
 
             $http({
                 method: 'GET',
-                url: BASE_URL + 'issues/me?orderBy=DueDate desc, IssueKey&pageSize=100&pageNumber=1'
+                url: BASE_URL + 'issues/me?orderBy=DueDate desc, IssueKey&pageSize=400&pageNumber=1'
             })
                 .then(function (success) {
                     deferred.resolve(success.data);

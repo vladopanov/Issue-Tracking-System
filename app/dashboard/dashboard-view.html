@@ -1,7 +1,7 @@
 <h1>Dashboard</h1>
 
 <div ng-show="isAdmin === 'true'">
-    <a href="#" class="btn btn-primary btn-lg">Add New Project</a>
+    <a href="#/projects/add" class="btn btn-primary btn-lg">Add New Project</a>
     <a href="#/projects" class="btn btn-primary btn-lg">List All Projects</a>
 </div>
 
@@ -10,7 +10,7 @@
         <div>
             <h2>Affiliated Projects</h2>
             <div class="affiliatedProjects">
-                <div ng-repeat="project in projectsByCurrentUserId.Projects">
+                <div ng-repeat="project in myProjects">
                     <a href="#/projects/{{project.Id}}">
                         {{project.Name}}
                     </a>

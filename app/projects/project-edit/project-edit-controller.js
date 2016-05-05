@@ -24,10 +24,12 @@ angular.module('issueTrackingSystem.projects.project.edit', [
         $routeProvider.otherwise({ redirectTo: '/' });
     }])
 
-    .controller('ProjectEditCtrl', ['$scope', '$route', 'projects', 'users', '$location', function($scope, $route, projects, users, $location) {
+    .controller('ProjectEditCtrl', ['$scope', '$route', 'projects', 'users', '$location', '$cookies', function($scope, $route, projects, users, $location, $cookies) {
         var projectId = $route.current.params.id;
         var labels = [];
         var priorities = [];
+
+        $scope.isAdmin = $cookies.get('isAdmin');
 
         projects.getProjectById(projectId)
             .then(function(project) {
@@ -56,13 +58,13 @@ angular.module('issueTrackingSystem.projects.project.edit', [
                     labels.split(', ').forEach(function(label) {
                         editedLabels.push({Name: label});
                     });
-                    editedProject.Labels = editedLabels;
+                    editedProject.labels = editedLabels;
 
                     var editedPriorities = [];
                     priorities.split(', ').forEach(function(priority) {
                         editedPriorities.push({Name: priority});
                     });
-                    editedProject.Priorities = editedPriorities;
+                    editedProject.priorities = editedPriorities;
 
                     projects.editProject(projectId, editedProject)
                         .then(function() {
