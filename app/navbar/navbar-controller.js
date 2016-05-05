@@ -5,7 +5,7 @@ angular.module('issueTrackingSystem.navbar', ['issueTrackingSystem.users.users-s
     .controller('NavbarCtrl', ['$scope', '$cookies', function($scope, $cookies) {
         $scope.isLoggedIn = function() {
             return $cookies.get('authoToken');
-        }
+        };
     }])
 
     .directive('navbarDirective', function() {

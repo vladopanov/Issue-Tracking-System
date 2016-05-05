@@ -22,8 +22,8 @@
         </div>
         <div>
             <div>
-                <a href="#/projects/{{project.Id}}/edit"><button type="submit" class="btn btn-primary" ng-if="userId == projectLeaderId">Edit</button></a>
-                <button type="submit" class="btn btn-primary" ng-click="openModal()" ng-if="userId == projectLeaderId">Add Issue</button>
+                <a href="#/projects/{{project.Id}}/edit"><button type="submit" class="btn btn-primary" ng-if="userId == projectLeaderId || isAdmin">Edit</button></a>
+                <button type="submit" class="btn btn-primary" ng-click="openModal()" ng-if="userId == projectLeaderId || isAdmin">Add Issue</button>
             </div>
         </div>
     </div>

@@ -27,6 +27,8 @@ angular.module('issueTrackingSystem.projects.project', [
     .controller('ProjectCtrl', ['$scope', '$route', 'projects', 'issues', '$cookies', '$uibModal', function($scope, $route, projects, issues, $cookies, $uibModal) {
         var projectId = $route.current.params.id;
 
+        $scope.isAdmin = $cookies.get('isAdmin');
+
         projects.getProjectById(projectId)
             .then(function(project) {
                 $scope.project = project;
