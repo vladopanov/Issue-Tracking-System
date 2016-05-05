@@ -28,18 +28,18 @@
         <div class="form-group">
             <label for="inputLabel" class="col-lg-2 control-label">Labels</label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputLabel" ng-model="labels"  value="{{labels}}" disabled>
+                <input type="text" class="form-control" id="inputLabel" ng-model="labels" value="{{labels}}">
             </div>
         </div>
         <div class="form-group">
             <label for="inputPriority" class="col-lg-2 control-label">Priorities</label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputPriority" ng-model="priorities" value="{{priorities}}" disabled>
+                <input type="text" class="form-control" id="inputPriority" ng-model="priorities" value="{{priorities}}">
             </div>
         </div>
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                <button type="submit" class="btn btn-primary" ng-click="editProject(project)">Edit</button>
+                <button type="submit" class="btn btn-primary" ng-click="editProject(project, labels, priorities)">Edit</button>
             </div>
         </div>
     </fieldset>

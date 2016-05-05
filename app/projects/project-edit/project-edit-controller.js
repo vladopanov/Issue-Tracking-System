@@ -44,7 +44,7 @@ angular.module('issueTrackingSystem.projects.project.edit', [
                 $scope.priorities = priorities.join(', ');
             });
 
-        $scope.editProject = function(projectToEdit) {
+        $scope.editProject = function(projectToEdit, labels, priorities) {
             var editedProject = {};
             users.getUserByUsername(projectToEdit.Lead.Username)
                 .then(function(user) {
@@ -53,16 +53,16 @@ angular.module('issueTrackingSystem.projects.project.edit', [
                     editedProject.LeadId = user.Id;
 
                     var editedLabels = [];
-                    labels.forEach(function(label) {
+                    labels.split(', ').forEach(function(label) {
                         editedLabels.push({Name: label});
                     });
-                    editedProject.labels = editedLabels;
+                    editedProject.Labels = editedLabels;
 
                     var editedPriorities = [];
-                    priorities.forEach(function(priority) {
+                    priorities.split(', ').forEach(function(priority) {
                         editedPriorities.push({Name: priority});
                     });
-                    editedProject.priorities = editedPriorities;
+                    editedProject.Priorities = editedPriorities;
 
                     projects.editProject(projectId, editedProject)
                         .then(function() {
