@@ -6,6 +6,7 @@ angular.module('issueTrackingSystem.welcome', ['issueTrackingSystem.users.users-
         $scope.register = function (user) {
             users.registerUser(user)
                 .then(function () {
+                    toastr.success('Successful Register');
                     users.loginUser({Username: user.Email, Password: user.ConfirmPassword})
                         .then(function () {
                             $route.reload();
@@ -16,6 +17,7 @@ angular.module('issueTrackingSystem.welcome', ['issueTrackingSystem.users.users-
         $scope.login = function (user) {
             users.loginUser(user)
                 .then(function () {
+                    toastr.success('Successful Login');
                     users.getCurrentUser()
                         .then(function() {
                             $route.reload();

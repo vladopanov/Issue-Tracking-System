@@ -21,8 +21,20 @@ angular.module('issueTrackingSystem', [
     'issueTrackingSystem.issues.issue.edit',
     'issueTrackingSystem.profile.password'
 ])
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
         $routeProvider.otherwise({redirectTo: '/'});
+
+        $httpProvider.interceptors.push(['$q','toastr', function($q, toastr) {
+            return {
+                'responseError': function(rejection) {
+                    if (rejection.statusText) {
+                        toastr.error(rejection.statusText);
+                    }
+
+                    return $q.reject(rejection);
+                }
+            }
+        }]);
     }])
 
     .run(['$rootScope', '$location', '$cookies', '$http', function($rootScope, $location, $cookies, $http) {
@@ -35,4 +47,5 @@ angular.module('issueTrackingSystem', [
         $http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get('authoToken');
     }])
 
-    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');
+    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
+    .constant('toastr', toastr);

@@ -25,6 +25,7 @@ angular.module('issueTrackingSystem.profile.password', ['issueTrackingSystem.use
         $scope.changePassword = function (password) {
             users.changePassword(password)
                 .then(function () {
+                    toastr.success('Successful Change of Password');
                     $location.path('/');
                 });
         };

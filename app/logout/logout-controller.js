@@ -25,6 +25,7 @@ angular.module('issueTrackingSystem.logout', ['issueTrackingSystem.users.users-s
         $scope.logout = function () {
             users.logoutUser()
                 .then(function () {
+                    toastr.success('Successful Logout');
                     $location.path('/');
                 });
         }
