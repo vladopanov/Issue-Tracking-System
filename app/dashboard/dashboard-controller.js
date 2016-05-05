@@ -37,29 +37,27 @@ angular.module('issueTrackingSystem.dashboard', [
                 issuesAssociated = myIssues.Issues
             })
             .then(function() {
+                projects.getProjectsByCurrentUserLeadId()
+                    .then(function(projectsByCurrentUserId) {
+                        $scope.projectsByLead = projectsByCurrentUserId.Projects;
+                    })
+            })
+            .then(function() {
                 issuesAssociated.forEach(function(issue) {
                     var projectId = issue.Project.Id;
                     projectsIds.add(projectId);
                 });
             })
             .then(function() {
-                projects.getProjectsByCurrentUserLeadId()
-                    .then(function(projectsByCurrentUserId) {
-                        projectsByCurrentUserId.Projects.forEach(function(project) {
-                            projectsIds.add(project.Id);
-                        })
-                    })
-            })
-            .then(function() {
                 projectsIds.forEach(function(id) {
                     projects.getProjectById(id)
                         .then(function(project) {
+                            console.log(project);
                             projectsAssociated.push(project)
                         })
                 })
             })
             .then(function() {
                 $scope.myProjects = projectsAssociated;
-                console.log(projectsAssociated)
             })
     }]);
